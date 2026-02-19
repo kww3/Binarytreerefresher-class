@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Binarytreerefresher;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,24 +40,42 @@ namespace Binarytreerefresher
         public void Add_Node(Node x, int y)
         {
             if (head == null)
-                head = new Node(); head.data = y;
+            {
+                head = new Node();
+                head.data = y;
+            }
             Node temp = new Node();
             temp = head;
 
             temp = Search_Node(temp, y);
 
-            if (y < temp.data && temp.left != null) // Once you get there.
+            if (y < temp.data && temp.left == null) // Once you get there.
             {
+                temp.left = new Node();
                 temp.left.parent = temp;
                 temp = temp.left;
             }
-            if (y >= temp.data && temp.right != null)
+            if (y > temp.data && temp.right == null)
             {
+                temp.right = new Node();
                 temp.right.parent = temp;
                 temp = temp.right;
             }
             temp.data = y;
         }
+    }
+}
+public class Program
+{
+    static void Main()
+    {
+        Node x = new Node();
+        int test_1 = 5;
+        int test_2 = 10;
+        int test_3 = 2;
+        Binarytree tree = new Binarytree();
+        tree.Add_Node(x, test_1);
+        tree.Add_Node(x, test_2);
     }
 }
 
